@@ -9,7 +9,7 @@ def index():
     homepage += "<a href=/mis>MIS</a><br>"
     homepage += "<a href=/today>顯示日期時間</a><br>"
     homepage += "<a href=/welcome?nick=洪可芸>傳送使用者暱稱</a><br>"
-    homepage += "<a href=/about>子青簡介網頁</a><br>"
+    homepage += "<a href=/about>可芸簡介網頁</a><br>"
     return homepage
 
 
