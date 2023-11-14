@@ -80,7 +80,20 @@ def query():
     if request.method == "POST":
         keyword = request.form["keyword"]
         result = "您輸入的關鍵字是：" + keyword
-        return result
+
+        Request = ""
+        db = firestore.client()
+        collection_ref = db.collection("圖書精選")
+        docs = collection_ref.order_by("anniversary").get()
+        for doc in docs:
+            bk = doc.to_dict()
+            if keyword in bk["title"]:
+                Rusult += "書名:<a href=" + bk["url"] + ">" + bk["title"] + "</a><br>"
+                Result += "作者:"+ bk["author"] + "<br>"
+                Result += str(bk["anniversary"] )+ "周年<br>"
+                Result += "<img scr+=" + bk["cover"] + "></img><br><br>"
+
+        return Result
     else:
         return render_template("searchbk.html")
 
