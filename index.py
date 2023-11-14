@@ -84,14 +84,14 @@ def query():
         Request = ""
         db = firestore.client()
         collection_ref = db.collection("圖書精選")
-        docs = collection_ref.order_by("anniversary").get()
+        docs = collection_ref.get()
         for doc in docs:
             bk = doc.to_dict()
             if keyword in bk["title"]:
                 Rusult += "書名:<a href=" + bk["url"] + ">" + bk["title"] + "</a><br>"
                 Result += "作者:"+ bk["author"] + "<br>"
-                Result += str(bk["anniversary"] )+ "周年<br>"
-                Result += "<img scr+=" + bk["cover"] + "></img><br><br>"
+                Result += str(bk["anniversary"] )+ "周年紀念版<br>"
+                Result += "<img scr+=" + bk["cover"] + "> </img><br><br>"
 
         return Result
     else:
