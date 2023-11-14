@@ -75,5 +75,14 @@ def books():
         Result += "<img scr+=" + bk["cover"] + "></img><br><br>"
     return Result
 
+@app.route("/query",methods=["GET", "POST"])
+def query():
+    if request.method == "POST":
+        keyword = request.form["keyword"]
+        result = "您輸入的關鍵字是：" + keyword
+        return result
+    else:
+        return render_template("searchbk.html")
+
 if __name__ == "__main__":
     app.run(debug=True)
