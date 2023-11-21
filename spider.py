@@ -9,11 +9,9 @@ Data.encoding = "utf-8"
 #print(Data.text)
 
 sp = BeautifulSoup(Data.text, "html.parser")
-result=sp.select(".team-box a")
+result=sp.select(".team-box")
 
 
 for x in result:
 	print(x.text)
 	print(x.find("a").get("href"))
-	
-	
