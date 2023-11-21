@@ -10,7 +10,7 @@ app = Flask(__name__)
 
 @app.route("/")
 def index():
-    homepage = "<h1>洪可芸Python網頁20231114b</h1>"
+    homepage = "<h1>洪可芸Python網頁20231121a/h1>"
     homepage += "<a href=/mis>MIS</a><br>"
     homepage += "<a href=/today>顯示日期時間</a><br>"
     homepage += "<a href=/welcome?nick=洪可芸>傳送使用者暱稱</a><br>"
@@ -19,6 +19,8 @@ def index():
     homepage += "<a href=/read>人選之人演員</a><br>"
     homepage += "<a href=/search>根據角色查詢演員</a><br><br>"
     homepage += "<a href=/books>精選圖書列表</a><br>"
+    homepage += "<a href=/query>書名查詢</a><br>"
+    homepage += "<a href=/spider網路爬蟲抓取子青老師課程</a><br>"
     return homepage
 
 
@@ -96,6 +98,20 @@ def query():
         return Result
     else:
         return render_template("searchbk.html")
+
+@app.route("/spide")
+def spider():
+    url = "https://www1.pu.edu.tw/~tcyang/course.html"
+    Data = requests.get(url)
+    Data.encoding = "utf-8"
+
+    sp = BeautifulSoup(Data.text, "html.parser")
+    result=sp.select(".team-box")
+    info=""
+    for x in result:
+        info += x.text + "<br>"
+        info += x.find("a").get("href") + "<br><br>"
+    return info
 
 if __name__ == "__main__":
     app.run(debug=True)
