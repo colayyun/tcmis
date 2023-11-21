@@ -6,11 +6,14 @@ firebase_admin.initialize_app(cred)
 from flask import Flask, render_template,request
 from datetime import datetime,timezone,timedelta
 
+import requests
+from bs4 import BeautifulSoup
+
 app = Flask(__name__)
 
 @app.route("/")
 def index():
-    homepage = "<h1>洪可芸Python網頁20231121a/h1>"
+    homepage = "<h1>洪可芸Python網頁20231121a</h1>"
     homepage += "<a href=/mis>MIS</a><br>"
     homepage += "<a href=/today>顯示日期時間</a><br>"
     homepage += "<a href=/welcome?nick=洪可芸>傳送使用者暱稱</a><br>"
@@ -109,7 +112,7 @@ def spider():
     result=sp.select(".team-box")
     info=""
     for x in result:
-        info += x.text + "<br>"
+        info += "<a href=" + x.find("a").get("href") + ">" + x.text + "</a><br>"
         info += x.find("a").get("href") + "<br><br>"
     return info
 
